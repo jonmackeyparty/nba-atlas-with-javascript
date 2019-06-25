@@ -249,7 +249,6 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   materialize-sass
-  omniauth
   omniauth-github
   puma (~> 3.11)
   rails (~> 5.2.3)
