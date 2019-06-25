@@ -2,6 +2,7 @@
   <h4 class='eight columns'><%= link_to "Active Leagues as Admin", player_leagues_path(@player) %></h4>
   <div class="four columns">
     <% if @player.league_admin.any? %>
+      <button type="button">View Leagues</button></br>
       <% @player.league_admin.each do |league| %>
         <%= link_to "#{league.name}", league_path(league) %><br>
       <% end %>
