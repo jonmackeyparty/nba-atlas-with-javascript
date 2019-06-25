@@ -6,5 +6,7 @@ Button for "View Leagues" >> shows index of leagues via js on player show page
         (or append to parent element)
         each element in the list should be be a link; once clicked, it can show the league detail
 
-      --this will be an onclick --> get to the leagues controller 
+        ** be aware may need an explicit serializer for trimming data **
+
+      --this will be an onclick --> get to the leagues controller
       --
