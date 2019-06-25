@@ -1,0 +1,7 @@
+<% @player.league_admin.each do |league| %>
+  <ul>
+    <% league.invitations.recent.each do |i| %>
+      <li>Invitation sent from <%= i.league_name %> on <%= i.created_date %> to <%= i.player_name %>.
+    <% end %>
+  </ul>
+<% end %>

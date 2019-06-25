@@ -1,0 +1,37 @@
+<div class="section">
+  <h2><%= @player.name %></h2>
+</div>
+<table class="u-full-width">
+  <thead>
+    <tr>
+      <th>Nickname: </th>
+      <th>Age: </th>
+      <th>Position: </th>
+      <th>Jersey Number: </th>
+    <tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @player.nickname %></td>
+      <td><%= @player.age %></td>
+      <td><%= @player.position %></td>
+      <td><%= @player.jersey_number %></td>
+    </tr>
+    </tbody>
+</table>
+
+<h4><%= link_to "Edit Player", edit_player_path(@player) %></h4>
+
+<div class="section">
+  <h2>Leagues</h2>
+</div>
+
+<%= render 'approved' %>
+
+<%= render 'admin_leagues' if @player.admin %>
+
+<div class="section">
+  <h2>Pending Invitations</h2>
+</div>
+
+<%= render 'pending' %>

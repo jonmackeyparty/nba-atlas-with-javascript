@@ -1,0 +1,14 @@
+<%= render partial: '/players/errors', locals: {obj: @league} %>
+<div>
+  <%= form_for((@league.new_record? ? [@player, @league] : @league)) do |f| %>
+      <%= f.hidden_field :admin_id %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      <%= f.label :league_type %>
+      <%= f.text_field :league_type %>
+      <%= f.label :schedule %>
+      <%= f.text_field :schedule %><br>
+      <%= f.submit %>
+      <%= f.submit "Cancel" %>
+  </div>
+<% end %>

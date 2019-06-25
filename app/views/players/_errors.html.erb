@@ -1,0 +1,14 @@
+<% if obj.errors.any? %>
+  <div class="row" id="error_explanation">
+    <h5>
+      <%= pluralize(obj.errors.count, "error") %>
+      prevented this entry from being saved:
+    </h5>
+
+    <ul>
+    <% obj.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

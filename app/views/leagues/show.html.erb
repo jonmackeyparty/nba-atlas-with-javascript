@@ -1,0 +1,10 @@
+<div class="section">
+  <h2><%= @league.name %></h2>
+</div>
+<ul>
+  <li>League Type: <%= @league.league_type %>
+  <li>Schedule: <%= @league.schedule %>
+  <li>League Admin: <%= @league.admin.name %>
+</ul>
+
+<%= render 'admin_links' if @player == @league.admin %>

@@ -1,0 +1,43 @@
+  <%= render partial: 'errors', locals: {obj: @player} %>
+  <%= form_for @player do |f| %>
+    <div class='row'>
+      <div class='six columns'>
+          <%= f.label :name %>
+          <%= f.text_field(:name, class: "u-full-width") %>
+      </div>
+      <div class='six columns'>
+        <%= f.label :nickname %>
+        <%= f.text_field(:nickname, class: "u-full-width") %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='four columns'>
+        <%= f.label :position %>
+        <%= f.text_field(:position, class: "u-full-width") %>
+      </div>
+      <div class='four columns'>
+        <%= f.label :age %>
+        <%= f.number_field(:age, class: "u-full-width") %>
+      </div>
+      <div class='four columns'>
+        <%= f.label :jersey_number %>
+        <%= f.number_field(:jersey_number, class: "u-full-width") %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='six columns'>
+        <%= f.label :password %>
+        <%= f.password_field(:password, class: "u-full-width") %>
+      </div>
+      <div class='six columns'>
+        <%= f.label "Confirm Password" %>
+        <%= f.password_field(:password_confirmation, class: "u-full-width") %>
+      </div>
+    </div>
+    <div class='row'>
+        <%= f.label "Are you a League Administrator?" %>Yes
+        <%= f.check_box :admin %>
+    </div>
+        <%= f.submit %>
+        <%= f.submit "Cancel" %>
+  <% end %>

@@ -1,0 +1,12 @@
+<div class='row'>
+  <h4 class="eight columns">Active Leagues as Player</h4>
+  <div class="four columns">
+    <% if @player.invitations.approved.any? %>
+      <% @player.invitations.approved.uniq.each do |i| %>
+        <%= link_to "#{i.league.name}", league_path(i.league) %><br>
+        <% end %>
+      <% else %>
+        <p>No active Leagues</p>
+    <% end %>
+  </div>
+</div>

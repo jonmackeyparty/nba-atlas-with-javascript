@@ -1,0 +1,4 @@
+<%= render 'players/pending' %>
+<%= render 'players/recent' if @player.admin %>
+
+<%= link_to "Back", player_path(@player) %>

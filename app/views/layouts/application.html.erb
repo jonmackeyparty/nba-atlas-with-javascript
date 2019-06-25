@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NBA Atlas</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <header>
+    <nav>
+      <div class='container'>
+        <div class='header-style'>
+          <h3>NONPROFESSIONAL BASKETBALLER'S ATLAS</h3>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <body>
+    <div class='container'>
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: "alert" %>
+      <% end %>
+
+      <%= yield %>
+
+    </div>
+  </body>
+  <footer>
+    <nav>
+      <div class='container'>
+        <div class='nav'>
+          <%= link_to "Sign Up", '/signup' %>  <%= link_to "Log In", '/login' %>  <%= link_to 'Log Out', '/logout', method: :post %>  <%= link_to "Home", '/' %>
+        </div>
+      </div>
+    </nav>
+  </footer>
+</html>
