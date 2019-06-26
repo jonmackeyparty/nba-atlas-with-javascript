@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/signup' => 'players#new'
   get '/auth/github/callback' => 'sessions#github_login'
   get '/players/:id/pending_invitations' => 'invitations#index'
+  get '/approved_invites' => 'players#approved_invites'
 
   resources :players do
     resources :leagues, :shallow => true
