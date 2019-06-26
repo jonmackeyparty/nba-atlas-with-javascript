@@ -58,12 +58,24 @@ function makePendingInvites() {
   $.get("/pending_invites", function(data) {
     debugger;
     if (data.length > 0) {
-
+      data.forEach(function(invite, index){
+        let inviteFromArray = new Invitation(invite.id, invite.league.name, invite.player.name);
+        $("#pending_invites").append(`${inviteFromArray.returnInvitation()}`);
+        $("#pending_invites").append(`<button id="accept-${inviteFromArray.id}">Accept Invitation</button>`;
+        $(`#accept-${inviteFromArray.id}`).on("click", function(){
+          acceptInvitation(inviteFromArray.id);
+        })
+        $("#pending_invites").append(`<button id="decline-${inviteFromArray.id}">Decline Invitation</button>`;
+        $(`#accept-${inviteFromArray.id}`).on("click", function(){
+          declineInvitation(inviteFromArray.id);
+        })
+      })
     } else {
       $("#pending_invites").append("No Pending Invitations.");
     }
   })
 }
+
 class Player {
   constructor(id, name, jerseyNumber, position) {
   this.id = id;
@@ -82,14 +94,17 @@ class League {
     this.schedule = schedule;
   }
   returnLeagues() {
-    return `<ul><a href="/leagues/${this.id}">${this.name}</a><br>League Type: ${this.type}<br>League Schedule: ${this.schedule}<br>`
+    return `<a href="/leagues/${this.id}">${this.name}</a><br>League Type: ${this.type}<br>League Schedule: ${this.schedule}<br>`
   }
 }
 
 class Invitation {
-  constructor(id, player_id, admin_id) {
+  constructor(id, league_name, league_admin) {
     this.id = id;
-    this.player_id = player_id;
-    this.admin_id = admin_id;
+    this.league_name = league_name;
+    this.league_admin = league_admin;
+  }
+  returnInvitation() {
+    return `<strong>Invitation received from ${this.league_name}, courtesy of ${this.league_admin}.</strong></br>`
   }
 }
