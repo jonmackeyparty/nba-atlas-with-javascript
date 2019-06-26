@@ -29,7 +29,7 @@ class LeaguesController < ApplicationController
   def get_admin_leagues
     current_user
     @leagues = League.where(:admin_id => @player.id)
-    render json: @leagues, status: 200 
+    render json: @leagues, status: 200
   end
 
   def update
@@ -40,7 +40,6 @@ class LeaguesController < ApplicationController
 
   def show
     @league = League.find(params[:id])
-    render json: @league, status: 200
   end
 
   def edit

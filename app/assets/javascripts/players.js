@@ -16,7 +16,6 @@ function attachListeners(){
 function hideButton(id) {
   console.log(id)
   let x = document.getElementById(id["id"])
-  //debugger;
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
@@ -40,7 +39,6 @@ function makeLeagues() {
 
 function makeAdminLeagues() {
   $.get("/admin_leagues", function(data) {
-    debugger;
     if (data.length > 0) {
       data.forEach(function(league, index) {
         let leagueFromArray = new League(league.id, league.name, league.league_type,   league.schedule);
@@ -71,6 +69,6 @@ class League {
     this.schedule = schedule;
   }
   returnLeagues() {
-    return `<ul><a href="/leagues/${this.id}">${this.name}</a><li>${this.type}</li><li>${this.schedule}</li></ul>`
+    return `<ul><a href="/leagues/${this.id}">${this.name}</a><br>League Type: ${this.type}<br>League Schedule: ${this.schedule}<br>`
   }
 }
