@@ -5,13 +5,14 @@ $(document).ready(function() {
 function attachListeners(){
   $("button#leagues").on("click", function(){
     makeLeagues();
-    hideLeaguesButton();
+    hideButton(this);
   });
 }
 
-function hideLeaguesButton() {
-  let x = document.getElementById("leagues");
-
+function hideButton(id) {
+  console.log(id)
+  let x = document.getElementById(id["id"])
+  //debugger;
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
