@@ -33,6 +33,7 @@ class PlayersController < ApplicationController
 
   def show
     current_user
+    @invitation = Invitation.new
   end
 
   def edit
