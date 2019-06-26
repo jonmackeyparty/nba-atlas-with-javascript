@@ -23,7 +23,7 @@ class PlayersController < ApplicationController
     end
   end
 
-  def approved_invites
+  def get_approved_invites
     current_user
     render json: @player, status: 200
   end

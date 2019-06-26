@@ -28,7 +28,7 @@ function makeLeagues() {
   $.get("/approved_invites", function(data) {
     if (data.leagues.length > 0) {
       data.leagues.forEach(function(league, index) {
-        let leagueFromArray = new League(league.name, league.league_type,   league.schedule);
+        let leagueFromArray = new League(league.id, league.name, league.league_type,   league.schedule);
         $("#player_leagues").append(`${leagueFromArray.returnLeagues()}`)
       })
     }
@@ -39,11 +39,11 @@ function makeLeagues() {
 }
 
 function makeAdminLeagues() {
-  $.get("/approved_invites", function(data) {
+  $.get("/admin_leagues", function(data) {
     debugger;
-    if (data.leagues.length > 0) {
-      data.leagues.forEach(function(league, index) {
-        let leagueFromArray = new League(league.name, league.league_type,   league.schedule);
+    if (data.length > 0) {
+      data.forEach(function(league, index) {
+        let leagueFromArray = new League(league.id, league.name, league.league_type,   league.schedule);
         $("#admin_leagues").append(`${leagueFromArray.returnLeagues()}`)
       })
     }
@@ -54,7 +54,8 @@ function makeAdminLeagues() {
 }
 
 class Player {
-  constructor(name, jerseyNumber, position) {
+  constructor(id, name, jerseyNumber, position) {
+  this.id = id;
   this.name = name;
   this.jerseyNumber = jerseyNumber;
   this.position = position;
@@ -63,12 +64,13 @@ class Player {
 }
 
 class League {
-  constructor(name, type, schedule) {
+  constructor(id, name, type, schedule) {
+    this.id = id;
     this.name = name;
     this.type = type;
     this.schedule = schedule;
   }
   returnLeagues() {
-    return `<ul><strong>${this.name}</strong><li>${this.type}</li><li>${this.schedule}</li></ul>`
+    return `<ul><a href="/leagues/${this.id}">${this.name}</a><li>${this.type}</li><li>${this.schedule}</li></ul>`
   }
 }
