@@ -21,11 +21,15 @@ function hideLeaguesButton() {
 
 function makeLeagues() {
   $.get("/approved_invites", function(data) {
-    data.leagues.forEach(function(league, index) {
-      let leagueFromArray = new League(league.name, league.league_type, league.schedule);
-      $("#player_leagues").append(`${leagueFromArray.returnLeagues()}`)
-    })
-
+    if (data.leagues.length > 0) {
+      data.leagues.forEach(function(league, index) {
+        let leagueFromArray = new League(league.name, league.league_type,   league.schedule);
+        $("#player_leagues").append(`${leagueFromArray.returnLeagues()}`)
+      })
+    }
+    else {
+      $("#player_leagues").append("No Active Leagues.")
+    }
   })
 }
 
