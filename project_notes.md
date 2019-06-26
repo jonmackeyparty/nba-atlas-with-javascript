@@ -10,3 +10,6 @@ Button for "View Leagues" >> shows index of leagues via js on player show page
 
       --this will be an onclick --> get to the leagues controller
       --
+
+
+//refactor event listeners to iterate over buttons//

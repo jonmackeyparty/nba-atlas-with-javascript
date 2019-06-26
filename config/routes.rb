@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/players/:id/pending_invitations' => 'invitations#index'
   get '/approved_invites' => 'players#get_approved_invites'
   get '/admin_leagues' => 'leagues#get_admin_leagues'
+  get '/pending_invites' => 'players#get_pending_invites'
 
   resources :players do
     resources :leagues, :shallow => true

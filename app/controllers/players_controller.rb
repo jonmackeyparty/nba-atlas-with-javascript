@@ -28,6 +28,12 @@ class PlayersController < ApplicationController
     render json: @player, status: 200
   end
 
+  def get_pending_invites
+    current_user
+    @invitations = @player.invitations.pending
+    render json: @invitations, status: 200
+  end
+
   def destroy
   end
 

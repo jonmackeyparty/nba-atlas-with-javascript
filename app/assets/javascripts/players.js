@@ -11,6 +11,10 @@ function attachListeners(){
     makeAdminLeagues();
     hideButton(this);
   });
+  $("button#pend_invites").on("click", function(){
+    makePendingInvites();
+    hideButton(this);
+  });
 }
 
 function hideButton(id) {
@@ -42,15 +46,24 @@ function makeAdminLeagues() {
     if (data.length > 0) {
       data.forEach(function(league, index) {
         let leagueFromArray = new League(league.id, league.name, league.league_type,   league.schedule);
-        $("#admin_leagues").append(`${leagueFromArray.returnLeagues()}`)
+        $("#admin_leagues").append(`${leagueFromArray.returnLeagues()}`);
       })
-    }
-    else {
-      $("#admin_leagues").append("No Active Leagues.")
+    } else {
+      $("#admin_leagues").append("No Active Leagues.");
     }
   })
 }
 
+function makePendingInvites() {
+  $.get("/pending_invites", function(data) {
+    debugger;
+    if (data.length > 0) {
+
+    } else {
+      $("#pending_invites").append("No Pending Invitations.");
+    }
+  })
+}
 class Player {
   constructor(id, name, jerseyNumber, position) {
   this.id = id;
@@ -70,5 +83,13 @@ class League {
   }
   returnLeagues() {
     return `<ul><a href="/leagues/${this.id}">${this.name}</a><br>League Type: ${this.type}<br>League Schedule: ${this.schedule}<br>`
+  }
+}
+
+class Invitation {
+  constructor(id, player_id, admin_id) {
+    this.id = id;
+    this.player_id = player_id;
+    this.admin_id = admin_id;
   }
 }
