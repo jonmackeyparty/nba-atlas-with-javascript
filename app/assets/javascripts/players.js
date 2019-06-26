@@ -61,11 +61,11 @@ function makePendingInvites() {
       data.forEach(function(invite, index){
         let inviteFromArray = new Invitation(invite.id, invite.league.name, invite.player.name);
         $("#pending_invites").append(`${inviteFromArray.returnInvitation()}`);
-        $("#pending_invites").append(`<button id="accept-${inviteFromArray.id}">Accept Invitation</button>`;
+        $("#pending_invites").append(`<button id="accept-${inviteFromArray.id}">Accept Invitation</button>`);
         $(`#accept-${inviteFromArray.id}`).on("click", function(){
           acceptInvitation(inviteFromArray.id);
         })
-        $("#pending_invites").append(`<button id="decline-${inviteFromArray.id}">Decline Invitation</button>`;
+        $("#pending_invites").append(`<button id="decline-${inviteFromArray.id}">Decline Invitation</button>`);
         $(`#accept-${inviteFromArray.id}`).on("click", function(){
           declineInvitation(inviteFromArray.id);
         })
@@ -105,6 +105,14 @@ class Invitation {
     this.league_admin = league_admin;
   }
   returnInvitation() {
-    return `<strong>Invitation received from ${this.league_name}, courtesy of ${this.league_admin}.</strong></br>`
+    return `Invitation received from ${this.league_name}, courtesy of ${this.league_admin}.</br>`
   }
+}
+
+function acceptInvitation(id) {
+
+}
+
+function declineInvitation(id) {
+
 }
