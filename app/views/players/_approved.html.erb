@@ -3,9 +3,12 @@
   <div class="four columns">
     <% if @player.invitations.approved.any? %>
       <button type="button">View Leagues</button></br>
+      <div id="player leagues"></div>
+      
+    <%# Old code for iterating over approved invites
       <% @player.invitations.approved.uniq.each do |i| %>
-        <%= link_to "#{i.league.name}", league_path(i.league) %><br>
-        <% end %>
+    <%# <%= link_to "#{i.league.name}", league_path(i.league) %>
+      <%#   <% end %>
     <% else %>
         <p>No active Leagues</p>
     <% end %>
