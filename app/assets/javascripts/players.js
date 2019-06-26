@@ -3,8 +3,12 @@ $(document).ready(function() {
 })
 
 function attachListeners(){
-  $("button#leagues").on("click", function(){
+  $("button#pl_leagues").on("click", function(){
     makeLeagues();
+    hideButton(this);
+  });
+  $("button#ad_leagues").on("click", function(){
+    makeAdminLeagues();
     hideButton(this);
   });
 }
@@ -30,6 +34,21 @@ function makeLeagues() {
     }
     else {
       $("#player_leagues").append("No Active Leagues.")
+    }
+  })
+}
+
+function makeAdminLeagues() {
+  $.get("/approved_invites", function(data) {
+    debugger;
+    if (data.leagues.length > 0) {
+      data.leagues.forEach(function(league, index) {
+        let leagueFromArray = new League(league.name, league.league_type,   league.schedule);
+        $("#admin_leagues").append(`${leagueFromArray.returnLeagues()}`)
+      })
+    }
+    else {
+      $("#admin_leagues").append("No Active Leagues.")
     }
   })
 }
