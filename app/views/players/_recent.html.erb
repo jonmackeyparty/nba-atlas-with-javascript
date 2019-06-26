@@ -1,7 +1,12 @@
-<% @player.league_admin.each do |league| %>
-  <ul>
-    <% league.invitations.recent.each do |i| %>
-      <li>Invitation sent from <%= i.league_name %> on <%= i.created_date %> to <%= i.player_name %>.
-    <% end %>
-  </ul>
-<% end %>
+<div class='row'>
+  <h4 class="eight columns">Recently Sent Invitations</h4>
+  <div class="four columns">
+    <% @player.league_admin.each do |league| %>
+    <ul>
+      <% league.invitations.recent.each do |i| %>
+        <li>Invitation sent from <%= i.league_name %> on <%= i.created_date %> to <%= i.player_name %>.
+          <% end %>
+        </ul>
+        <% end %>
+  </div>
+</div>

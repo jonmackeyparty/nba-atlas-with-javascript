@@ -31,7 +31,9 @@
 <%= render 'admin_leagues' if @player.admin %>
 
 <div class="section">
-  <h2>Pending Invitations</h2>
+  <h2>Invitations</h2>
 </div>
 
 <%= render 'pending' %>
+
+<%= render 'recent' if @player.admin %>

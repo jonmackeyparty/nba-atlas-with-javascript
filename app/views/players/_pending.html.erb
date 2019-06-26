@@ -1,20 +1,25 @@
-<% if @player.invitations.pending.any? %>
-  <ol>
-  <% @player.invitations.pending.each do |i| %>
-  <li>Invitation Received from <%= i.league_name %> on <%= i.created_date %>, courtesy of <%= i.admin_name %>.
-      <%= form_for i do |f| %>
-      <div class="row">
-        <div class="three columns">
-          <%= f.hidden_field :accepted, :value => "1" %>
-          <%= button_to "Accept Invitation", i, :method => :post %>
+<div class='row'>
+  <h4 class="eight columns">Pending Invitations</h4>
+  <div class="four columns">
+    <% if @player.invitations.pending.any? %>
+    <ol>
+      <% @player.invitations.pending.each do |i| %>
+      <li>Invitation Received from <%= i.league_name %> on <%= i.created_date %>, courtesy  of <%= i.admin_name %>.
+        <%= form_for i do |f| %>
+        <div class="row">
+          <div class="three columns">
+            <%= f.hidden_field :accepted, :value => "1" %>
+            <%= button_to "Accept Invitation", i, :method => :post %>
+          </div>
+          <div class="three columns">
+            <%= button_to "Decline Invitation", i, :method => :delete %>
+          </div>
         </div>
-        <div class="three columns">
-          <%= button_to "Decline Invitation", i, :method => :delete %>
-        </div>
-      </div>
+        <% end %>
+        <% end %>
+      </ol>
+      <% else %>
+      <p>No pending invitations</p>
       <% end %>
-  <% end %>
-  </ol>
-<% else %>
-  <p>No pending invitations</p>
-<% end %>
+  </div>
+</div>
