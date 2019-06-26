@@ -3,9 +3,18 @@ $(document).ready(function() {
 })
 
 function attachListeners(){
-  $("button#view leagues").on("click", function(){
+  $("button#leagues").on("click", function(){
     makeLeagues();
   });
+}
+
+function makeLeagues() {
+  console.log('clicked')
+  $.get("/approved_invites", function(data) {
+    debugger;
+
+
+  })
 }
 
 class Player {
@@ -15,4 +24,8 @@ class Player {
   this.position = position;
   }
 
+}
+
+class League {
+  
 }

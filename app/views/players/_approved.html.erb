@@ -1,16 +1,15 @@
 <div class='row'>
   <h4 class="eight columns">Active Leagues as Player</h4>
   <div class="four columns">
-    <% if @player.invitations.approved.any? %>
-      <button type="button" id="view leagues">View Leagues</button></br>
-      <div id="player leagues"></div>
-
+    <button type="button" id="leagues">View Leagues</button></br>
+    <div id="player leagues"></div>
     <%# Old code for iterating over approved invites
-      <% @player.invitations.approved.uniq.each do |i| %>
+    <%# <% if @player.invitations.approved.any? %>
+    <%#  <% @player.invitations.approved.uniq.each do |i| %>
     <%# <%= link_to "#{i.league.name}", league_path(i.league) %>
       <%#   <% end %>
-    <% else %>
-        <p>No active Leagues</p>
-    <% end %>
+    <%#<% else %>
+        <%#<p>No active Leagues</p>
+    <%# <% end %>
   </div>
 </div>
