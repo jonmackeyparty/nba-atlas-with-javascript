@@ -1,6 +1,6 @@
 class InvitationsController < ApplicationController
   include InvitationsHelper
-  before_action :require_login
+  #before_action :require_login
   before_action :check_cancel, only: [:create]
 
   def index
@@ -32,7 +32,7 @@ class InvitationsController < ApplicationController
     @invitation = Invitation.find(params[:id])
     @invitation.delete
     flash[:message] = "Invitation deleted."
-    redirect_to player_path(current_user)
+    #redirect_to player_path(current_user)
   end
 
   private

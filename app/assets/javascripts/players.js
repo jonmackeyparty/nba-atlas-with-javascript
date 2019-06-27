@@ -7,7 +7,6 @@ var currentUser;
 
 function getCurrentUser() {
   $.get("/current_user", function(data) {
-    debugger;
     currentUser = new Player(data.id, data.name, data.jersey_number, data.position)
   })
 }
@@ -120,19 +119,35 @@ class Invitation {
 }
 
 function acceptInvitation(id) {
+  debugger;
   $.ajax({
-    url: `invitations/${id}`,
+    url: `/invitations/${id}`,
     type: 'PATCH',
-    data: { accepted: true },
+    data: { authenticity_token: $('[name="csrf-token"]')[0].content, accepted: true },
+    success: function(data) {
+      debugger;
+      if (document.getElementById("pend_invites").style.display === "none") {
+        makeLeagues();
+      }
+      console.log(data);
+    },
+    error: function(data) {
+      console.log(data);
+    }
   })
-  if (document.getElementById("pend_invites").style.display === "none") {
-    makeLeagues();
-  }
 }
 
 function declineInvitation(id) {
+  debugger;
   $.ajax({
-    url: `invitations/${id}`,
+    url: `/invitations/${id}`,
     type: 'DELETE',
+    data: { authenticity_token: $('[name="csrf-token"]')[0].content },
+    error: function(data) {
+      console.log(data);
+    },
+    success: function(data) {
+      console.log(data);
+    }
   })
 }
