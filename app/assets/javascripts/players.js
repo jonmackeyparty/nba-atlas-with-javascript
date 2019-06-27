@@ -123,7 +123,7 @@ function acceptInvitation(id) {
   $.ajax({
     url: `/invitations/${id}`,
     type: 'PATCH',
-    data: { authenticity_token: $('[name="csrf-token"]')[0].content, accepted: true },
+    data: { authenticity_token: $('[name="csrf-token"]')[0].content, invitation: {accepted: true} },
     success: function(data) {
       debugger;
       if (document.getElementById("pend_invites").style.display === "none") {
