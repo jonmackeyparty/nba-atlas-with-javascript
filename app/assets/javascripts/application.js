@@ -14,5 +14,7 @@
 //= require jquery
 //= require activestorage
 //= require turbolinks
+//= require main
 //= require player
+//= require invitation
 //= require_tree .
