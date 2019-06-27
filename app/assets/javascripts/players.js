@@ -42,8 +42,9 @@ function toggleButton(id) {
 function makeLeagues() {
   $.get("/approved_invites", function(data) {
     if (data.length > 0) {
-      data.leagues.forEach(function(league, index) {
-        let leagueFromArray = new League(league.id, league.name, league.league_type, league.schedule);
+      data.forEach(function(league, index) {
+        debugger;
+        let leagueFromArray = new League(league.league_id, league.league.name, league.league.league_type, league.league.schedule);
         $("#player_leagues").append(`${leagueFromArray.returnLeagues()}`)
       })
     }
@@ -70,6 +71,7 @@ function makePendingInvites() {
   $.get("/pending_invites", function(data) {
     if (data.length > 0) {
       data.forEach(function(invite, index){
+        debugger;
         let inviteFromArray = new Invitation(invite.id, invite.league.name, invite.player.name);
         $("#pending_invites").append(`${inviteFromArray.returnInvitation()}`);
         inviteFromArray.attachInviteListeners(inviteFromArray.id);
