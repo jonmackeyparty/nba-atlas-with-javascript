@@ -14,19 +14,19 @@ function getCurrentUser() {
 function attachListeners(){
   $("button#pl_leagues").on("click", function(){
     makeLeagues();
-    hideButton(this);
+    toggleButton(this);
   });
   $("button#ad_leagues").on("click", function(){
     makeAdminLeagues();
-    hideButton(this);
+    toggleButton(this);
   });
   $("button#pend_invites").on("click", function(){
     makePendingInvites();
-    hideButton(this);
+    toggleButton(this);
   });
 }
 
-function hideViewLeaguesButton(id) {
+function toggleButton(id) {
   let x = document.getElementById(id["id"])
   if (x.style.display === "none") {
     x.style.display = "block";
@@ -141,7 +141,10 @@ function declineInvitation(id) {
       console.log(data);
     },
     success: function(data) {
-
+      debugger;
+      let x = document.getElementById("pend_invites")
+      $(`#invite-${id}`).remove();
+      toggleButton(x);
     }
   })
 }
