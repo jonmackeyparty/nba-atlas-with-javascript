@@ -28,6 +28,10 @@ function attachListeners(){
     makeRecentInvites();
     toggleButton(this);
   });
+  $("form#new_invitation").submit(function(event){
+    event.preventDefault();
+    submitInvitation(this);
+  })
 }
 
 function toggleButton(id) {
@@ -169,4 +173,16 @@ function declineInvitation(id) {
       toggleButton(x);
     }
   })
+}
+
+function submitInvitation(selector){
+  debugger;
+  $.ajax({
+    type: "POST",
+    url: $(selector).attr('action'),
+    data: $(selector).serialize(),
+    error: function(data) {
+      console.log(data);
+    },
+  });
 }
