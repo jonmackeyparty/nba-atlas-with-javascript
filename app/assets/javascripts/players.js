@@ -43,7 +43,6 @@ function makeLeagues() {
   $.get("/approved_invites", function(data) {
     if (data.length > 0) {
       data.forEach(function(league, index) {
-        debugger;
         let leagueFromArray = new League(league.league_id, league.league.name, league.league.league_type, league.league.schedule);
         $("#player_leagues").append(`${leagueFromArray.returnLeagues()}`)
       })
@@ -71,7 +70,6 @@ function makePendingInvites() {
   $.get("/pending_invites", function(data) {
     if (data.length > 0) {
       data.forEach(function(invite, index){
-        debugger;
         let inviteFromArray = new Invitation(invite.id, invite.league.name, invite.player.name);
         $("#pending_invites").append(`${inviteFromArray.returnInvitation()}`);
         inviteFromArray.attachInviteListeners(inviteFromArray.id);
@@ -118,16 +116,16 @@ class League {
 }
 
 class Invitation {
-  constructor(id, league_name, league_admin) {
+  constructor(id, league_name, player) {
     this.id = id;
     this.league_name = league_name;
-    this.league_admin = league_admin;
+    this.player = player;
   }
   returnInvitation() {
-    return `<div id="invite-${this.id}">Invitation received from ${this.league_name}, courtesy of ${this.league_admin}.</br><button id="accept-${this.id}">Accept Invitation</button><button id="decline-${this.id}">Decline Invitation</button></div>`
+    return `<div id="invite-${this.id}">Invitation #${this.id} received from ${this.league_name}.</br><button id="accept-${this.id}">Accept Invitation</button><button id="decline-${this.id}">Decline Invitation</button></div>`
   }
   returnRecentInvites() {
-    return `Invitation sent to ${this.league_admin} on behalf of ${this.league_name}.<br>`
+    return `Invitation sent to ${this.player} on behalf of ${this.league_name}.<br>`
   }
   attachInviteListeners(id) {
     $(`#accept-${this.id}`).on("click", function(){
@@ -145,14 +143,13 @@ function acceptInvitation(id) {
     type: 'PATCH',
     data: { authenticity_token: $('[name="csrf-token"]')[0].content, invitation: {accepted: true} },
     success: function(data) {
-      debugger;
       let x = document.getElementById("pend_invites")
       $(`#invite-${id}`).remove();
       toggleButton(x);
+      $("#player_leagues").empty();
       makeLeagues();
     },
     error: function(data) {
-      debugger;
       console.log(data);
     }
   })
