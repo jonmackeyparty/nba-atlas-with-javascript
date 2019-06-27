@@ -18,7 +18,6 @@ function attachListeners(){
 }
 
 function hideButton(id) {
-  console.log(id)
   let x = document.getElementById(id["id"])
   if (x.style.display === "none") {
     x.style.display = "block";
@@ -110,7 +109,14 @@ class Invitation {
 }
 
 function acceptInvitation(id) {
-
+  $.ajax({
+    url: `/invitations/${id}`,
+    type: 'PATCH',
+    data: { accepted: true };
+  })
+  if (document.getElementById("pend_invites").style.display === "none") {
+    makeLeagues();
+  }
 }
 
 function declineInvitation(id) {
