@@ -28,5 +28,15 @@ class Player < ApplicationRecord
     end
   end
 
+  def get_recent_invitations
+    invitations = []
+    league_admin.each do |league|
+      league.invitations.recent.each do |invite|
+        invitations.push(invite)
+      end
+    end
+    return invitations 
+  end
+
 
 end

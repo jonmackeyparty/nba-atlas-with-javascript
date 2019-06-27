@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/admin_leagues' => 'leagues#get_admin_leagues'
   get '/pending_invites' => 'players#get_pending_invites'
   get '/current_user' => 'players#get_current_user'
+  get '/recent_invites' => 'players#get_recent_invites'
 
   resources :players do
     resources :leagues, :shallow => true

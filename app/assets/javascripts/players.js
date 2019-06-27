@@ -7,7 +7,8 @@ var currentUser;
 
 function getCurrentUser() {
   $.get("/current_user", function(data) {
-    currentUser = new Player(data.id, data.name, data.jersey_number, data.position)
+    debugger;
+    currentUser = new Player(data.id, data.name, data.jersey_number, data.position, data.admin)
   })
 }
 
@@ -24,6 +25,10 @@ function attachListeners(){
     makePendingInvites();
     toggleButton(this);
   });
+  $("button#rec_invites").on("click", function(){
+    makeRecentInvites();
+    toggleButton(this);
+  });
 }
 
 function toggleButton(id) {
@@ -37,9 +42,10 @@ function toggleButton(id) {
 
 function makeLeagues() {
   $.get("/approved_invites", function(data) {
+    debugger;
     if (data.leagues.length > 0) {
       data.leagues.forEach(function(league, index) {
-        let leagueFromArray = new League(league.id, league.name, league.league_type,   league.schedule);
+        let leagueFromArray = new League(league.id, league.name, league.league_type, league.schedule);
         $("#player_leagues").append(`${leagueFromArray.returnLeagues()}`)
       })
     }
@@ -72,6 +78,20 @@ function makePendingInvites() {
       })
     } else {
       $("#pending_invites").append("No Pending Invitations.");
+    }
+  })
+}
+
+function makeRecentInvites() {
+  $.get("/recent_invites", function(data) {
+    if (data.length > 0) {
+      data.forEach(function(invite, index){
+        let inviteFromArray = new Invitation(invite.id, invite.league.name, invite.player.name);
+        $("#pending_invites").append(`${inviteFromArray.returnInvitation()}`);
+        inviteFromArray.attachInviteListeners(inviteFromArray.id);
+      })
+    } else {
+      $("#recent_invites").append("No Recent Invitations.");
     }
   })
 }
@@ -123,16 +143,20 @@ function acceptInvitation(id) {
     type: 'PATCH',
     data: { authenticity_token: $('[name="csrf-token"]')[0].content, invitation: {accepted: true} },
     success: function(data) {
-      console.log(data);
+      debugger;
+      let x = document.getElementById("pend_invites")
+      $(`#invite-${id}`).remove();
+      toggleButton(x);
+      makeLeagues();
     },
     error: function(data) {
+      debugger;
       console.log(data);
     }
   })
 }
 
 function declineInvitation(id) {
-  debugger;
   $.ajax({
     url: `/invitations/${id}`,
     type: 'DELETE',
@@ -141,7 +165,6 @@ function declineInvitation(id) {
       console.log(data);
     },
     success: function(data) {
-      debugger;
       let x = document.getElementById("pend_invites")
       $(`#invite-${id}`).remove();
       toggleButton(x);
