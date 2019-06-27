@@ -34,6 +34,11 @@ class PlayersController < ApplicationController
     render json: @invitations, status: 200
   end
 
+  def get_current_user
+    current_user
+    render json: @player, status: 200
+  end
+
   def destroy
   end
 

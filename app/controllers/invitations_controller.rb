@@ -25,6 +25,7 @@ class InvitationsController < ApplicationController
   def update
     @invitation = Invitation.find(params[:id])
     check_duplicates
+    render json: @invitation
   end
 
   def destroy

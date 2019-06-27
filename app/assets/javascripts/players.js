@@ -1,6 +1,16 @@
 $(document).ready(function() {
   attachListeners();
+  getCurrentUser();
 })
+
+var currentUser;
+
+function getCurrentUser() {
+  $.get("/current_user", function(data) {
+    debugger;
+    currentUser = new Player(data.id, data.name, data.jersey_number, data.position)
+  })
+}
 
 function attachListeners(){
   $("button#pl_leagues").on("click", function(){
@@ -55,17 +65,18 @@ function makeAdminLeagues() {
 
 function makePendingInvites() {
   $.get("/pending_invites", function(data) {
-    debugger;
     if (data.length > 0) {
       data.forEach(function(invite, index){
         let inviteFromArray = new Invitation(invite.id, invite.league.name, invite.player.name);
+
         $("#pending_invites").append(`${inviteFromArray.returnInvitation()}`);
         $("#pending_invites").append(`<button id="accept-${inviteFromArray.id}">Accept Invitation</button>`);
         $(`#accept-${inviteFromArray.id}`).on("click", function(){
           acceptInvitation(inviteFromArray.id);
         })
+
         $("#pending_invites").append(`<button id="decline-${inviteFromArray.id}">Decline Invitation</button>`);
-        $(`#accept-${inviteFromArray.id}`).on("click", function(){
+        $(`#decline-${inviteFromArray.id}`).on("click", function(){
           declineInvitation(inviteFromArray.id);
         })
       })
@@ -110,9 +121,9 @@ class Invitation {
 
 function acceptInvitation(id) {
   $.ajax({
-    url: `/invitations/${id}`,
+    url: `invitations/${id}`,
     type: 'PATCH',
-    data: { accepted: true };
+    data: { accepted: true },
   })
   if (document.getElementById("pend_invites").style.display === "none") {
     makeLeagues();
@@ -120,5 +131,8 @@ function acceptInvitation(id) {
 }
 
 function declineInvitation(id) {
-
+  $.ajax({
+    url: `invitations/${id}`,
+    type: 'DELETE',
+  })
 }
