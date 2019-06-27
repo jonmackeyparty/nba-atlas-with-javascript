@@ -7,7 +7,6 @@ var currentUser;
 
 function getCurrentUser() {
   $.get("/current_user", function(data) {
-    debugger;
     currentUser = new Player(data.id, data.name, data.jersey_number, data.position, data.admin)
   })
 }
@@ -42,8 +41,7 @@ function toggleButton(id) {
 
 function makeLeagues() {
   $.get("/approved_invites", function(data) {
-    debugger;
-    if (data.leagues.length > 0) {
+    if (data.length > 0) {
       data.leagues.forEach(function(league, index) {
         let leagueFromArray = new League(league.id, league.name, league.league_type, league.schedule);
         $("#player_leagues").append(`${leagueFromArray.returnLeagues()}`)
@@ -59,7 +57,7 @@ function makeAdminLeagues() {
   $.get("/admin_leagues", function(data) {
     if (data.length > 0) {
       data.forEach(function(league, index) {
-        let leagueFromArray = new League(league.id, league.name, league.league_type,   league.schedule);
+        let leagueFromArray = new League(league.id, league.name, league.league_type, league.schedule);
         $("#admin_leagues").append(`${leagueFromArray.returnLeagues()}`);
       })
     } else {
@@ -87,8 +85,7 @@ function makeRecentInvites() {
     if (data.length > 0) {
       data.forEach(function(invite, index){
         let inviteFromArray = new Invitation(invite.id, invite.league.name, invite.player.name);
-        $("#pending_invites").append(`${inviteFromArray.returnInvitation()}`);
-        inviteFromArray.attachInviteListeners(inviteFromArray.id);
+        $("#recent_invites").append(`${inviteFromArray.returnRecentInvites()}`);
       })
     } else {
       $("#recent_invites").append("No Recent Invitations.");
@@ -126,6 +123,9 @@ class Invitation {
   }
   returnInvitation() {
     return `<div id="invite-${this.id}">Invitation received from ${this.league_name}, courtesy of ${this.league_admin}.</br><button id="accept-${this.id}">Accept Invitation</button><button id="decline-${this.id}">Decline Invitation</button></div>`
+  }
+  returnRecentInvites() {
+    return `Invitation sent to ${this.league_admin} on behalf of ${this.league_name}.<br>`
   }
   attachInviteListeners(id) {
     $(`#accept-${this.id}`).on("click", function(){

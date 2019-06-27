@@ -25,7 +25,8 @@ class PlayersController < ApplicationController
 
   def get_approved_invites
     current_user
-    render json: @player, status: 200
+    @invitations = @player.invitations.approved
+    render json: @invitations, status: 200
   end
 
   def get_pending_invites
@@ -34,10 +35,10 @@ class PlayersController < ApplicationController
     render json: @invitations, status: 200
   end
 
-
   def get_recent_invites
-    current_user 
-
+    current_user
+    @invitations = @player.get_recent_invitations
+    render json: @invitations, status: 200
   end
 
   def get_current_user
