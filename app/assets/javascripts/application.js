@@ -17,4 +17,5 @@
 //= require main
 //= require player
 //= require invitation
+//= require notify
 //= require_tree .

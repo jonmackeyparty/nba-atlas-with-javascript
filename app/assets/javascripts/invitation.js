@@ -55,7 +55,6 @@ function declineInvitation(id) {
 }
 
 function submitInvitation(selector){
-  debugger;
   $.ajax({
     type: "POST",
     url: $(selector).attr('action'),
@@ -63,5 +62,20 @@ function submitInvitation(selector){
     error: function(data) {
       console.log(data);
     },
+    success: function(data) {
+      debugger;
+      console.log(data)
+      $.notify("Invitation Sent.", "success");
+    },
   });
+  function updateSentInvites() {
+    let x = document.getElementById('rec_invites');
+    if (x.style.display === "none") {
+        $("#recent_invites").empty();
+        toggleButton(x);
+    } else {
+      makeRecentInvites();
+      toggleButton(x);
+    }
+  }
 }

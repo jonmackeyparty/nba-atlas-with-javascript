@@ -54,7 +54,7 @@ function makeLeagues() {
     else {
       $("#player_leagues").append("No Active Leagues.")
     }
-  })
+  });
 }
 
 function makeAdminLeagues() {
@@ -67,7 +67,7 @@ function makeAdminLeagues() {
     } else {
       $("#admin_leagues").append("No Active Leagues.");
     }
-  })
+  });
 }
 
 function makePendingInvites() {
@@ -81,7 +81,7 @@ function makePendingInvites() {
     } else {
       $("#pending_invites").append("No Pending Invitations.");
     }
-  })
+  });
 }
 
 function makeRecentInvites() {
@@ -94,5 +94,5 @@ function makeRecentInvites() {
     } else {
       $("#recent_invites").append("No Recent Invitations.");
     }
-  })
+  });
 }
