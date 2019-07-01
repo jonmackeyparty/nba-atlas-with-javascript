@@ -15,7 +15,7 @@ class InvitationsController < ApplicationController
   def create
       @invitation = Invitation.new(invitations_params)
       if @invitation.save
-        flash[:message] = "Invitation successfully sent."
+        #flash[:message] = "Invitation successfully sent."
         #redirect_to player_path(current_user)
       else
         #redirect_to new_player_invitation_path(current_user)
@@ -30,7 +30,7 @@ class InvitationsController < ApplicationController
   def destroy
     @invitation = Invitation.find(params[:id])
     @invitation.delete
-    flash[:message] = "Invitation deleted."
+    #flash[:message] = "Invitation deleted."
   end
 
   private

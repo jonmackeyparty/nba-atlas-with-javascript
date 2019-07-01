@@ -47,6 +47,7 @@ function declineInvitation(id) {
       console.log(data);
     },
     success: function(data) {
+      $.notify("Invitation declined.", "success");
       let x = document.getElementById("pend_invites")
       $(`#invite-${id}`).remove();
       toggleButton(x);
@@ -63,7 +64,6 @@ function submitInvitation(selector){
       console.log(data);
     },
     success: function(data) {
-      debugger;
       console.log(data)
       $.notify("Invitation Sent.", "success");
     },
