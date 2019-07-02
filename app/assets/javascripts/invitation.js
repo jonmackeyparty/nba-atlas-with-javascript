@@ -67,23 +67,15 @@ function submitInvitation(selector){
       console.log(data);
     },
     success: function(data) {
-      debugger;
-      console.log(data)
+      let x = document.getElementById('rec_invites');
       $.notify("Invitation Sent.", "success");
       if (currentUser.id === data.player_id) {
         $("#no_pending_invites").empty();
         makePendingInvites();
-      } else {
-        updateSentInvites();
+      } else if (x.style.display === "none") {
+        $("#recent_invites").empty();
+        makeRecentInvites();
       }
     },
   });
-
-  function updateSentInvites() {
-    let x = document.getElementById('rec_invites');
-    if (x.style.display === "none") {
-        $("#recent_invites").empty();
-        makeRecentInvites();
-    }
-  }
 }

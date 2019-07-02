@@ -16,8 +16,8 @@ Button for "View Leagues" >> shows index of leagues via js on player show page
 
 refresh buttons for the 2 sections
 
-make js load smoother (find some other way to load other than eampty() and .append?)
+make js load smoother (find some other way to load other than empty() and .append?)
 
   --is it ok to stick a bunch of stuff in the ajax:success?
 
-fix duplicate of list recent invites on submitInvitation() success
+change flash alert color
