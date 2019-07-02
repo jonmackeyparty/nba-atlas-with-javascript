@@ -49,8 +49,11 @@ function declineInvitation(id) {
     success: function(data) {
       $.notify("Invitation declined.", "success");
       let x = document.getElementById("pend_invites")
+      let y = document.getElementById("pending_invites")
       $(`#invite-${id}`).remove();
-      toggleButton(x);
+      if (y.childElementCount === 0) {
+        toggleButton(x);
+      }
     }
   })
 }
@@ -71,7 +74,8 @@ function submitInvitation(selector){
         $("#no_pending_invites").empty();
         makePendingInvites();
       } else {
-        makePendingInvites();
+        $("#recent_invites").empty();
+        makeRecentInvites();
       }
     },
   });

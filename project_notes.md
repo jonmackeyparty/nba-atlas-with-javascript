@@ -18,4 +18,6 @@ refresh buttons for the 2 sections
 
 make js load smoother (find some other way to load other than eampty() and .append?)
 
-fix toggle expectation if multiple invites
+  --is it ok to stick a bunch of stuff in the ajax:success?
+
+fix duplicate of list recent invites on submitInvitation() success
