@@ -74,19 +74,16 @@ function submitInvitation(selector){
         $("#no_pending_invites").empty();
         makePendingInvites();
       } else {
-        $("#recent_invites").empty();
-        makeRecentInvites();
+        updateSentInvites();
       }
     },
   });
+
   function updateSentInvites() {
     let x = document.getElementById('rec_invites');
     if (x.style.display === "none") {
         $("#recent_invites").empty();
-        toggleButton(x);
-    } else {
-      makeRecentInvites();
-      toggleButton(x);
+        makeRecentInvites();
     }
   }
 }
