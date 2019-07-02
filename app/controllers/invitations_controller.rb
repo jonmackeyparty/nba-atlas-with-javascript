@@ -17,6 +17,7 @@ class InvitationsController < ApplicationController
       if @invitation.save
         #flash[:message] = "Invitation successfully sent."
         #redirect_to player_path(current_user)
+        render json: @invitation, status: 201
       else
         #redirect_to new_player_invitation_path(current_user)
       end

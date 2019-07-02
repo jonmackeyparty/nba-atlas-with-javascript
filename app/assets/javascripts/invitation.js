@@ -64,8 +64,15 @@ function submitInvitation(selector){
       console.log(data);
     },
     success: function(data) {
+      debugger;
       console.log(data)
       $.notify("Invitation Sent.", "success");
+      if (currentUser.id === data.player_id) {
+        $("#no_pending_invites").empty();
+        makePendingInvites();
+      } else {
+        makePendingInvites();
+      }
     },
   });
   function updateSentInvites() {

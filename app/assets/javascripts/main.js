@@ -47,7 +47,7 @@ function makeLeagues() {
   $.get("/approved_invites", function(data) {
     if (data.length > 0) {
       data.forEach(function(league, index) {
-        let leagueFromArray = new League(league.league_id, league.league.name, league.league.league_type, league.league.schedule);
+        let leagueFromArray = new League(league.league_id, league.league.name, league.league.league_type, league.league.schedule, league.league.admin_id);
         $("#player_leagues").append(`${leagueFromArray.returnLeagues()}`)
       })
     }
@@ -79,7 +79,7 @@ function makePendingInvites() {
         inviteFromArray.attachInviteListeners(inviteFromArray.id);
       })
     } else {
-      $("#pending_invites").append("No Pending Invitations.");
+      $("#no_pending_invites").append("No Pending Invitations.");
     }
   });
 }

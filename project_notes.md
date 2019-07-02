@@ -13,3 +13,9 @@ Button for "View Leagues" >> shows index of leagues via js on player show page
 
 
 //refactor event listeners to iterate over buttons//
+
+refresh buttons for the 2 sections
+
+make js load smoother (find some other way to load other than eampty() and .append?)
+
+fix toggle expectation if multiple invites
