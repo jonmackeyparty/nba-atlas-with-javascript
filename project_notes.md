@@ -12,12 +12,10 @@ Button for "View Leagues" >> shows index of leagues via js on player show page
       --
 
 
-//refactor event listeners to iterate over buttons//
-
 refresh buttons for the 2 sections
 
 make js load smoother (find some other way to load other than empty() and .append?)
 
   --is it ok to stick a bunch of stuff in the ajax:success?
 
-change flash alert color
+convert active league link to display details via js to satisfy project requirements  (rather than going ahead and listing it)

@@ -40,6 +40,7 @@ class LeaguesController < ApplicationController
 
   def show
     @league = League.find(params[:id])
+    render json: @league, status: 200
   end
 
   def edit
