@@ -47,10 +47,9 @@ function makeLeagues() {
   $.get("/approved_invites", function(data) {
     if (data.length > 0) {
       data.forEach(function(league, index) {
-        debugger;
         let leagueFromArray = new League(league.league_id, league.league.name, league.league.league_type, league.league.schedule, league.league.admin_id);
         $("#player_leagues").append(`${leagueFromArray.returnPlayerLeagues()}`)
-        leagueFromArray.attachLeagueListeners(leagueFromArray.id);
+        leagueFromArray.attachPlayerListener(leagueFromArray.id);
       })
     }
     else {
@@ -65,7 +64,7 @@ function makeAdminLeagues() {
       data.forEach(function(league, index) {
         let leagueFromArray = new League(league.id, league.name, league.league_type, league.schedule);
         $("#admin_leagues").append(`${leagueFromArray.returnAdminLeagues()}`);
-        leagueFromArray.attachLeagueListeners(leagueFromArray.id);
+        leagueFromArray.attachAdminListener(leagueFromArray.id);
       })
     } else {
       $("#admin_leagues").append("No Active Leagues.");
