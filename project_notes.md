@@ -18,4 +18,4 @@ make js load smoother (find some other way to load other than empty() and .appen
 
   --is it ok to stick a bunch of stuff in the ajax:success?
 
-convert active league link to display details via js to satisfy project requirements  (rather than going ahead and listing it)
+streamline constructor

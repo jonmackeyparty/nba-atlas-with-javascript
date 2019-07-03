@@ -46,8 +46,8 @@ function toggleButton(id) {
 function makeLeagues() {
   $.get("/approved_invites", function(data) {
     if (data.length > 0) {
-      data.forEach(function(league, index) {
-        let leagueFromArray = new League(league.league_id, league.league.name, league.league.league_type, league.league.schedule, league.league.admin_id);
+      data.forEach(function(invitation) {
+        let leagueFromArray = new League(invitation.league_id, invitation.league.name, invitation.league.league_type, invitation.league.schedule, invitation.league.admin_id);
         $("#player_leagues").append(`${leagueFromArray.returnPlayerLeagues()}`)
         leagueFromArray.attachPlayerListener(leagueFromArray.id);
       })
@@ -61,8 +61,8 @@ function makeLeagues() {
 function makeAdminLeagues() {
   $.get("/admin_leagues", function(data) {
     if (data.length > 0) {
-      data.forEach(function(league, index) {
-        let leagueFromArray = new League(league.id, league.name, league.league_type, league.schedule);
+      data.forEach(function(league) {
+        let leagueFromArray = new League(league.id, league.name, league.league_type, league.schedule, league.admin.id);
         $("#admin_leagues").append(`${leagueFromArray.returnAdminLeagues()}`);
         leagueFromArray.attachAdminListener(leagueFromArray.id);
       })
@@ -75,7 +75,7 @@ function makeAdminLeagues() {
 function makePendingInvites() {
   $.get("/pending_invites", function(data) {
     if (data.length > 0) {
-      data.forEach(function(invite, index){
+      data.forEach(function(invite){
         let inviteFromArray = new Invitation(invite.id, invite.league.name, invite.player.name);
         $("#pending_invites").append(`${inviteFromArray.returnInvitation()}`);
         inviteFromArray.attachInviteListeners(inviteFromArray.id);
@@ -89,7 +89,7 @@ function makePendingInvites() {
 function makeRecentInvites() {
   $.get("/recent_invites", function(data) {
     if (data.length > 0) {
-      data.forEach(function(invite, index){
+      data.forEach(function(invite){
         let inviteFromArray = new Invitation(invite.id, invite.league.name, invite.player.name);
         $("#recent_invites").append(`${inviteFromArray.returnRecentInvites()}`);
       })

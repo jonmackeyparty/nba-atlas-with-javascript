@@ -4,7 +4,7 @@ class League {
     this.name = name;
     this.type = type;
     this.schedule = schedule;
-    this.admin_id = admin_id
+    this.admin_id = admin_id;
   }
   returnPlayerLeagues() {
     return `<strong>${this.name}</strong><br><button id="player_league_button-${this.id}">Show League Details</button></div><div id="player_league-${this.id}"></div>`
