@@ -34,8 +34,26 @@ function showPlayerLeague(league_id) {
 
 function showAdminLeague(league_id) {
   $.get(`/leagues/${league_id}`, function(data) {
-    $(`#admin_league-${league_id}`).append(`League Type: ${data.league_type}<br>League Schedule: ${data.schedule}<br>League Administrator: ${data.admin.name}<br>`);
+    $(`#admin_league-${league_id}`).append(`League Type: ${data.league_type}<br>League Schedule: ${data.schedule}<br>League Administrator: ${data.admin.name}<br>Players:<br> ${addPlayers(data.players)}`);
   });
   let x = document.getElementById(`admin_league_button-${league_id}`)
   toggleButton(x);
+}
+
+function addPlayers(players) {
+  let comparePlayers = function(a,b) {
+    let aLastName = a.split(' ')[1];
+    let bLastName = b.split(' ')[1];
+    if (aLastName < bLastName) {
+      return -1;
+    } else if (aLastName > bLastName) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+  let playerArray = players.map(function(player) {
+    return `${player.name}`;
+  });
+  return playerArray.sort(comparePlayers).join('<br>');
 }

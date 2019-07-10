@@ -12,12 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_05_06_205713) do
 
-  create_table "admins", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "invitations", force: :cascade do |t|
     t.integer "league_id"
     t.integer "player_id"
@@ -46,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_205713) do
     t.string "password_digest"
     t.string "password_confirmation"
     t.boolean "admin", default: false
+    t.integer "uid"
   end
 
   create_table "teams", force: :cascade do |t|

@@ -3,7 +3,7 @@ $(document).ready(function() {
   getCurrentUser();
 })
 
-var currentUser;
+let currentUser;
 
 function getCurrentUser() {
   $.get("/current_user", function(data) {
